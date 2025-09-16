@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch - Local</title>
+
+</head>
+
+
+<body>
+
+    <script type="text/javascript">
+           
+        //    => fetch()
+
+        //    fetch(url)
+        //    .then(response=>response.json())
+        //    .then(data)
+        //    .catch(err=>console.log(err))
+
+        const url = "./l10sampledata.json";
+
+        fetch(url).then(function(response){
+            // console.log(response);
+            // console.log(response.status);
+            // console.log(response.json());
+            return response.json();
+        }).then(function(data){
+            console.log(data);
+            console.log(typeof data);
+
+                 console.log(data);
+        console.log(data.weather);//Dot Notation
+        console.log(data.weather[0].main);//Dot Notation
+        console.log(data.weather[0]["main"]);//Bracket Notation
+        
+        console.log(data.wind.speed);//Dot Notation
+        console.log(data.wind["speed"]);//Bracket Notation
+        console.log(data["wind"]["speed"]);//Bracket Notation
+        }).catch(function(err){
+            console.log(err);
+        });
+       
+        
+        //Arrow Function 
+
+        fetch(url).then(reponse=>reponse.json()).then(data=>{
+            console.log(data);
+            console.log(data.wind.speed); //Dot Notation
+            console.log(data.wind['speed']);//Bracket Notation
+        }).catch(err=>console.log(err));
+
+
+
+           
+
+    
+        
+    </script>
+</body>
+</html>
+
+
+
+<!-- IP 
+
+
+LOcal IP 
+    (i)Dynamic ip
+    (ii)Fixed IP /Static IP
+
+External IP
+    (i)Public IP /Dynamic IP
+    (ii)Fixed IP /Static IP -->

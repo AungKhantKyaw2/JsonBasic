@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Request by AJAX - Random User</title>
+</head>
+<body>
+        <script type="text/javascript">
+            
+            let url = `https://randomuser.me/api/`;
+
+            // console.log(url);
+
+            const xmlhttp = new XMLHttpRequest();
+  
+            console.log(xmlhttp);
+         
+         
+            // //result oki
+            // xmlhttp.open("GET",url,true);//true mean  synchronize
+            // xmlhttp.send();
+      
+         // no result 
+        //  xmlhttp.open("GET",url,false);//false mean no synchronize
+        //  xmlhttp.send();
+      
+            
+
+            xmlhttp.onreadystatechange=function(){
+                console.log("State changed =",xmlhttp.readyState,xmlhttp.status);
+
+            if(xmlhttp.readyState===4 && xmlhttp.status===200){
+              let result=xmlhttp.responseText;
+            //   console.log(result);
+
+
+            result= JSON.parse(result);
+            // console.log(result);
+
+            console.log(result.results);
+            console.log(result.results[0]);
+            console.log(result.results[0].name);
+            console.log(result.results[0].name.title,result.results[0].name.first,result.results[0].name.last);
+
+            console.log(result.results[0]["name"]["title"],result.results[0]["name"]["first"],result.results[0]["name"]["last"]);
+      
+            }
+            }; 
+        
+        //  result oki
+            // xmlhttp.open("GET",url,true);//true mean  synchronize
+            // xmlhttp.send();
+
+        // result 
+         xmlhttp.open("GET",url,false);//false mean no synchronize
+         xmlhttp.send();
+        
+       </script>
+</body>
+</html>
+
+<!-- 
+=>xmlhttp.onreadystatechange
+xmlhttp.readyState === 4
+
+0=UNSENT open() has not been called yet
+1=OPENED send() has been called
+2=Header_received send() has been called and headers and status are available
+3=Loading downloading ,responseText hold partial datas
+4=DONE the operation is completed
+
+
+ -->

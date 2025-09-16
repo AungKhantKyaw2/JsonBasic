@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax - Dummy Json</title>
+
+    <style type="text/css">
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }    
+        .container{
+            width: 300px;
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+        <div id="display"></div>
+        <button type="button" id="btn">Load Data</button>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   
+    <script type="text/javascript">
+             //=> axios
+
+        // axios.get(url)
+        //      .then(callbackfunction)
+        //      .catch(err=>console.log(err));
+        const getdisplay = document.getElementById('display');
+        const getbtn = document.getElementById('btn');
+
+        getbtn.addEventListener("click",function(){
+            loaddata();
+        });
+
+        function loaddata(){
+            const url = 'https://dummyjson.com/products';
+
+    
+
+            axios({
+                method:"GET",
+                url:url
+            }).then(data=>{
+                console.log(data);
+                // console.log(data.data.products);
+                data.data.products.forEach(function(product){
+                    // console.log(product);
+                    console.log(product.id,product.title,product.price);
+})
+            }).catch(err=>console.log(err));
+
+
+
+        }
+
+
+    </script>
+</body>
+</html>
+
+
+                       
+
+

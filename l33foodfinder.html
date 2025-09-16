@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Finder</title>
+
+    <style type="text/css">
+        body{
+        
+            display: flex;
+            justify-content: center;
+        
+            background-color: #f4f4f4;
+        }    
+      .container{
+            max-width: 60vw;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+      }
+
+      button{
+        font-size: 14px;
+        padding: 8px 10px;
+        margin: 0;
+        cursor: pointer;
+      }
+
+      .displayone{
+         width: 70%;
+      }
+
+      .displayone img{
+        width: 200px;
+        border:5px solid #ffff;
+      }
+
+      .displayone p {
+        text-align: justify;
+      }
+    
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+       <h1>Food Finder</h1>
+        <button type="button" id="random-btn">Get Random Food</button>
+
+        <div id="header"></div>
+        <div id="displayone" class="displayone"></div>
+    </div>
+
+    <script type="text/javascript">
+        
+        //GET UI 
+
+        const getrandombtn = document.getElementById('random-btn');
+        const getheader   =document.getElementById('header');
+        const getdisplayone = document.getElementById('displayone');
+
+        getrandombtn.addEventListener('click',getrandomfood);
+
+        function getrandomfood(){
+                //console.log("hay");
+
+                //Lookup a single random meal
+
+            const url ="https://www.themealdb.com/api/json/v1/1/random.php";
+
+            fetch(url)
+            .then(response=>response.json())
+            .then(data=>
+                {
+                    console.log(data);
+                    // console.log(typeof data);// object
+                    const food = data.meals[0];
+                    // console.log(food);
+
+                    foodsettertodom(food);
+                }
+            ).catch(err=>console.log(err));
+        }
+     
+        function foodsettertodom(food){
+            console.log(food); 
+
+            let ingredients=[];
+
+            for(let x=1; x<=20; x++){
+                // console.log(x); //1 to 20 
+             
+                // if(food[`strIngredient${x}`]){
+                //     ingredients.push(`${food[`strIngredient${x}`]} = ${food[`strMeasure${x}`]}`);
+                // }
+
+                
+                //method 2
+                // ingredients.push(`${food[`strIngredient${x}`]} = ${food[`strMeasure${x}`]}`);
+
+                // ingredients = ingredients.filter(item => item.trim() !== '=');
+            }
+
+            console.log(ingredients);
+
+            getdisplayone.innerHTML=`
+            
+                <h3>${food.strMeal}</h3>
+                <img src='${food.strMealThumb}' alt="${food.strMeal}"/>
+
+                <ul class="list-group">
+                    <li>${food.strArea}</li>
+                </ul>
+
+                <div>
+                    <p>${food.strInstructions}</p>
+                    <h3>Main Ingredients</h3>
+
+                    <ol>
+                        ${ingredients.map(ingredient=>`<li>${ingredient}</li>`).join("")}
+                    </ol>
+                </div>
+            `;
+        }
+
+      
+    
+        
+    </script>
+</body>
+</html>
+
+
+
+
+<!-- IP 
+
+
+LOcal IP 
+    (i)Dynamic ip
+    (ii)Fixed IP /Static IP
+
+External IP
+    (i)Public IP /Dynamic IP
+    (ii)Fixed IP /Static IP -->
+
+    
+ 

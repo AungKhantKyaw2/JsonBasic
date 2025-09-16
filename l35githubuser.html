@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.1/css/all.min.css" integrity="sha512-/RUbtHakVMJrg1ILtwvDIceb/cDkk97rWKvfnFSTOmNbytCyEylutDqeEr9adIBye3suD3RfcsXLOLBqYRW4gw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Github Usser</title>
+
+    <style type="text/css">
+        body{
+        
+            height: 100vh;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        
+
+        }    
+        .card-body img{
+            width: 120px;
+        }
+
+     
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+            <div class="col-md-6 mx-auto">
+                <div class="card rounded-0">   
+                        <div class="card-header">
+                            <form id="form" action="" method="">
+                                <div class="form-group"> 
+                                    <input type="text" name="search" id="search" class="form-control form-control-sm" placeholder="Search..." autocomplete="off"/>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="displayone" class="card-body">
+                            <!-- <img src="" class="rounded-circle" alt="userimg"/>
+                            <h3 class="card-title">User Name</h3>
+                            <p class="card-subtitle">Bio</p>
+
+                            <ul class="list-group">
+                                <li class="list-group-item">Respositories: <span class="fw-bold">100</span></li>
+                                <li class="list-group-item">Followers: <span class="fw-bold">200</span></li>
+                                <li class="list-group-item">Following: <span class="fw-bold">300</span></li>
+                            </ul> -->
+                        </div>  
+
+                        <div id="displaytwo" class="card-footer">
+                            <div class="dropdown float-end">
+                                <a href="javascript:void(0);" class="btn btn-success btn-sm rounded-0 dropdown-toggle" data-bs-toggle="dropdown">Respositories Links </a>
+                                <ul id="displaylistgroup" class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="javascript:void(0);" target="_blank">sample link</a></li>
+                                
+                                  </ul>
+                            </div>
+                    
+                        </div>
+                </div>  
+            </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script  src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+        const getform = document.getElementById('form');
+        const getsearch = document.getElementById('search');
+        const getdisplayone = document.getElementById('displayone');
+        const getdisplaytwo = document.getElementById('displaytwo');
+        const getdisplaylistgroup = document.getElementById('displaylistgroup');
+        
+        getform.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            const getusrname = getsearch.value;
+            console.log(getusrname);
+            if(getusrname.trim()){
+                getresult(getusrname);
+                getsearch.value = "";
+                getsearch.focus();
+            }else{
+                window.alert("Please enter a search value");
+            }
+        });
+        const url ="https://api.github.com/users/";
+        getresult('datalandtechnology');
+     
+        function getresult(username){
+            console.log(username);
+
+            axios({
+                method:"GET",
+                url:url+username
+            }).then(response=>{
+                // console.log(response);
+                // console.log(typeof response.data);
+
+                const {data} = response;
+                console.log(data);
+
+                cardbodytodom(data);
+                resultrepos(username);
+            }).catch(err=>{
+                console.log(err);
+                if(err.response.status=== 404){
+                    
+                    getdisplayone.innerHTML= `
+                        <div class="alert alert-danger text-center">No Data Found !!!</div>
+                    `;
+
+                    getdisplaylistgroup.innerHTML =`<li><a href="javascript:void(0);" class="dropdown-item">No Data</a></li>`;
+                }
+            });
+        }
+
+        function cardbodytodom(user){
+            console.log(user);
+            getdisplayone.innerHTML=`
+                <img src="${user.avatar_url}" class="rounded-circle" alt="userimg"/>
+                            <h3 class="card-title">${user.login}</h3>
+                            <p class="card-subtitle">${user.bio}</p>
+
+                            <ul class="list-group">
+                                <li class="list-group-item">Respositories: <span class="fw-bold">${user.public_repos}</span></li>
+                                <li class="list-group-item">Followers: <span class="fw-bold">${user.followers}</span></li>
+                                <li class="list-group-item">Following: <span class="fw-bold">${user.following}</span></li>
+                            </ul>
+            `;
+        }
+
+        function resultrepos(username){
+                // console.log(username);
+
+                $.ajax({
+                    method:"GET",
+                    url:url+username+"/repos" ,
+                    dataType:'json'
+                }).done((data)=>{
+                    // console.log(data);
+                    cardfootertodom(data);
+                }).fail(()=>{
+                    console.log('Error');
+                });
+        }
+
+        function cardfootertodom(respositories){
+            // console.log(respositories);
+            getdisplaylistgroup.innerHTML="";
+            respositories.forEach(respositorie=>{
+                // console.log(respositorie);
+                getdisplaylistgroup.innerHTML +=`<li><a href="${respositorie.html_url}" class="dropdown-item" target="_blank">${respositorie.name}</a></li>`;
+            });            
+
+          
+        }
+
+    </script>
+</body>
+</html>
+
+
+
+
+<!-- Github Profile >Github Docs > Developers >Rest API > Users >Users >Get the anthenticated userimg
+
+Enter this url in browser https://api.github.com/
+so you will see all available api route list  -->

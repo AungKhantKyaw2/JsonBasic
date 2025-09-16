@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jquery- Local</title>
+
+</head>
+
+
+<body>
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript">
+           
+
+
+        //$.ajax()
+
+        // $.ajax({
+        //     method:'',
+        //     url:url,
+        //     dataType:'json' //text
+        // }).done((data)=>{
+        //     output
+        // }).fail(()=>{
+        //     error
+        // });
+
+           const latitude = "21.99160904";
+            const longitude = "96.1062094";
+            const key ="ca2806166dd718b39ed73f10be83b778";
+            const url =`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=ca2806166dd718b39ed73f10be83b778`;
+            
+        $.ajax({
+            method:'GET',
+            url:url,
+            dataType:'json' //text
+        }).done((data)=>{
+        console.log(data);
+        console.log(data.weather);//Dot Notation
+        console.log(data.weather[0].main);//Dot Notation
+        console.log(data.weather[0]["main"]);//Bracket Notation
+        
+        console.log(data.wind.speed);//Dot Notation
+        console.log(data.wind["speed"]);//Bracket Notation
+        console.log(data["wind"]["speed"]);//Bracket Notation
+        
+        console.log(data.name);//
+        console.log(data["name"]);
+        }).fail((err)=>console.log("Error message",err));
+
+
+    
+        
+    </script>
+</body>
+</html>
+
+
+
+<!-- IP 
+
+
+LOcal IP 
+    (i)Dynamic ip
+    (ii)Fixed IP /Static IP
+
+External IP
+    (i)Public IP /Dynamic IP
+    (ii)Fixed IP /Static IP -->

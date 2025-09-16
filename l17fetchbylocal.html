@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch - Local</title>
+
+</head>
+
+
+<body>
+
+    <script type="text/javascript">
+           
+        //    => fetch()
+
+        //    fetch(url)
+        //    .then(response=>response.json())
+        //    .then(data)
+        //    .catch(err=>console.log(err))
+
+        const url = "./l5simpledata.json";
+
+        fetch(url).then(function(response){
+            console.log(response);
+            console.log(response.status);
+            // console.log(response.json());
+            return response.json();
+        }).then(function(data){
+            console.log(data);
+            console.log(typeof data);
+
+                 console.log(data);
+        console.log(data.firstname);//Dot Notation
+        console.log(data.lastname);//Dot Notation
+        console.log(data.age);//Bracket Notation
+        
+        console.log(data.tax);//Dot Notation
+        console.log(data.passport);//Bracket Notation
+        console.log(data.remark);//Bracket Notation
+        console.log(data.holiday[0],data.holiday[1]);
+        console.log(data.qualify[0]["subject"],data.qualify[0]["mark"]);//Bracket Notation
+        }).catch(function(err){
+            console.log(err);
+        });
+       
+
+
+    
+        
+    </script>
+</body>
+</html>
+
+
+
+<!-- IP 
+
+
+LOcal IP 
+    (i)Dynamic ip
+    (ii)Fixed IP /Static IP
+
+External IP
+    (i)Public IP /Dynamic IP
+    (ii)Fixed IP /Static IP -->

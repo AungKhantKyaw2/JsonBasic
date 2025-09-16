@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch - ip registry</title>
+
+    <style type="text/css">
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }    
+        .container{
+            width: 300px;
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="container">
+        <div id="display">
+   
+        </div>
+        <button type="button" id="btn">Click me</button>
+
+     
+    </div>
+    <script type="text/javascript">
+            
+        const getdisplay = document.getElementById('display');
+        const getbtn = document.getElementById('btn');
+
+        getbtn.addEventListener("click",function(){
+            loaddata();
+        });
+
+        function loaddata(){
+            const key =`ira_NwJRnWEuVEN1QaQFw1U6kgcGPQSRlM0EcJhl`;
+            const url = `https://api.ipregistry.co?key=${key}`;
+         
+            fetch(url).then(function(response){
+                return response.json();
+            }).then(function(data){
+                                let html =`
+                <ul>
+                    <li>External IP - ${data.ip}</li>
+                    <li>Current Device - ${data.user_agent.device.name}</li>
+                    <li>Operation System IP - ${data.user_agent.os.name}</li>
+                    <li>Load By - ${data.user_agent.type}</li>
+                    <li>City - ${data.location.city}</li>
+                    <li>Local Currency - ${data.currency.code}</li>
+                    <li>Timezone - ${data['time_zone']['id']}</li>
+                </ul>
+                `;
+
+                getdisplay.innerHTML =html;
+
+            }).catch(function(err){
+                console.log(err);
+            });
+
+    
+     
+
+        }
+
+
+
+           
+
+    
+        
+    </script>
+</body>
+</html>
+
+
+
+
+
+<!-- IP 
+
+
+LOcal IP 
+    (i)Dynamic ip
+    (ii)Fixed IP /Static IP
+
+External IP
+    (i)Public IP /Dynamic IP
+    (ii)Fixed IP /Static IP -->
