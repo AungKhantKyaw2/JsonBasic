@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.1/css/all.min.css" integrity="sha512-/RUbtHakVMJrg1ILtwvDIceb/cDkk97rWKvfnFSTOmNbytCyEylutDqeEr9adIBye3suD3RfcsXLOLBqYRW4gw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Asynchronous and Await Exercise</title>
+
+
+</head>
+
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script  src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+        let url = `https://randomuser.me/api/`;
+
+        fetch(url)
+        .then(response=>response.json())
+        .then(data1=>{console.log(data1)})
+        .catch(err=>console.log(err));
+       
+        //=>Asychronous (async & await)
+
+        async function getusers(){
+        await fetch(url)
+        .then(response=>response.json())
+        .then(data1=>{console.log(data1)})
+        .catch(err=>console.log(err));
+        }
+
+
+        getusers();
+        console.log("hi");
+
+
+        
+        async function getmembers(){
+
+            //await response for the fetch call (step 1 =request)
+            const response = await fetch(url);
+
+
+            //proceed if resolved (step 2 =promise)
+            const data = await response.json();
+            
+
+            return data;
+
+        }
+
+        // (step 3 = Get Response)
+        getmembers().then(response=> console.log(response));
+        console.log("hello");
+
+
+    </script>
+</body>
+</html>
+
