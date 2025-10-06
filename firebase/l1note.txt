@@ -1,0 +1,124 @@
+
+https://firebase.google.com 
+
+Go to console > Create a project
+project name = Myfirstproject
+
+click "Continue"
+
+Enable Google Analytics for this project =unchecked
+click create project  > Continue
+
+
+=>Register An App for Web
+
+click </> (web icon)
+Register App = MyFirstAppForWeb
+
+Also set up hosting = unchecked
+click Register App
+
+Click 'Continue to Console'
+
+
+=> Get firebase SDK code (Software Development Kit)
+
+Click 'Leftside bar' > Project Overview > Project Settings > you can see your app code 
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBjPDPfZwOPLDOdQ4bgxN8ATIORskI9TBA",
+    authDomain: "myfirstproject-4e6b3.firebaseapp.com",
+    projectId: "myfirstproject-4e6b3",
+    storageBucket: "myfirstproject-4e6b3.firebasestorage.app",
+    messagingSenderId: "62478772673",
+    appId: "1:62478772673:web:d1119749276b88e8a96740"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+
+=>Setting up Firebase via NPM( Javascript Node)
+
+https://nodejs.org/en
+
+=>Download
+https://nodejs.org/en/download
+
+
+for Ubuntu  Linux
+
+= need to install nvm (node version manager)
+sudo apt update
+sudo apt-get upgrade -you
+
+sudo apt install curl
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+node -v # Should print "v22.20.0".
+
+nvm install 22
+or
+sudo apt-get install nodejs
+
+sudo apt-get install NPM
+
+check version = node -v // v22.30
+check version = npm -v // 10.8.1
+
+
+-------------------------------------------------------
+
+=>Nodemon (auto restart after save(ctl+s))
+
+(before = just for knowledge why we need nodemon)
+
+ctl+s
+ctl+c 
+node server.js
+
+
+ctl+s
+rs   =restart server 
+
+(after = nodemon)
+
+nodemom server.js
+ctl+s
+
+
+=>install (global install)
+npm install -g nodemon
+
+=> Specific Project (optional)
+npm install --save-dev nodemon
+
+=>Using nodemon
+nodemom server.js
+
+=>Add nodemon to package.json(Optional)
+
+"scripts":{
+      "start":"node server.js",
+      "dev":"nodemon server.js"
+}
+
+Then you can run nodemon with :
+npm run dev
+
+=check version 
+nodemon -v // 3.1.10
+
+https://www.npmjs.com/package/nodemon
+
+----------------------------------------------------
+
+
+
+websocket sockio pusher
